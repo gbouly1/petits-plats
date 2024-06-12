@@ -1,48 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-</head>
-<body>
-   <div class="my-0 mx-auto max-w-[1440px] ">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="my-0 mx-auto max-w-[1440px]">
+      <header
+        class="relative flex flex-col justify-center bg-gray-800 h-[667px] bg-[url('./assets/img/hero-banner.png')]"
+      >
+        <div class="logo absolute top-8 left-8">
+          <img src="./assets/img/Logo.png" alt="Logo" />
+        </div>
+        <div class="wrapper-hero flex flex-col items-center gap-5">
+          <h1
+            class="text-[#FFD15B] text-4xl font-['Anton'] max-w-[550px] text-center leading-normal"
+          >
+            Cherchez parmi plus de 1500 recettes du quotidien, simples et
+            délicieuses
+          </h1>
+          <div class="search-bar relative">
+            <input
+              type="search"
+              id="search"
+              placeholder="Rechercher une recette, un ingrédient, ..."
+              class="h-[72px] w-[954px] rounded-lg pl-4 font-['Manrope']"
+            />
+            <button
+              class="absolute right-0 bg-gray-800 h-12 w-12 rounded-lg right-3 top-3"
+            >
+              <img
+                class="m-auto"
+                src="./assets/svg/loupe.svg"
+                alt="Loupe de recherche"
+              />
+            </button>
+          </div>
+        </div>
+      </header>
 
-       <header class="relative flex flex-col justify-center bg-gray-800 h-[667px] bg-[url('./assets/img/hero-banner.png')]">
-           <div class="logo absolute top-8 left-8">
-               <img src="./assets/img/Logo.png" alt="Logo">
-            </div>
-            <div class="wrapper-hero flex flex-col items-center gap-5">
-                <h1 class="text-[#FFD15B] text-4xl font-['Anton'] max-w-[550px] text-center leading-normal">Cherchez parmi plus de 1500 recettes du quotidien, simples et délicieuses</h1>
-                <div class="search-bar relative">
-                    <input type="search" id="search" placeholder="Rechercher une recette, un ingrédient, ..." class="h-[72px] w-[954px] rounded-lg pl-4 font-['Manrope']">
-                    <button class="absolute right-0 bg-gray-800 h-12 w-12 rounded-lg right-3 top-3"><svg class="m-auto" xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
-                        <circle cx="10" cy="10.4219" r="9.5" stroke="white"/>
-                        <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="white"/>
-                      </svg>
-                    </button>
-                </div>
-            </div>
-        </header>
-
-
-        <main>
-            <label for="ingredient-select"></label>
-            <select name="ingredient" id="ingredient-select">
-                <label for="site-search">Search the site:</label>
-<input type="search" id="site-search" name="q" />
-            </select>
-
-
-        </main>
-
-    </div> 
+      <main>
+        <div class="recipesWrapper"></div>
+      </main>
+    </div>
     <script src="./scripts/index.js"></script>
-</body>
+  </body>
 </html>
