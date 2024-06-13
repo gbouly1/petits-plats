@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./style/style.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/dist/output.css" rel="stylesheet" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -52,10 +53,36 @@
         </div>
       </header>
 
-      <main>
+      <main class="bg-[#EDEDED]">
+        <div class="relative inline-block w-64">
+          <button
+            id="dropdownButton"
+            class="bg-white border border-gray-300 text-gray-700 py-2 px-4 w-full rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Ingrédients
+            <span class="float-right">▼</span>
+          </button>
+          <div
+            id="dropdownMenu"
+            class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
+          >
+            <div class="p-2">
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Rechercher..."
+                class="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              />
+            </div>
+            <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
+              <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
+            </ul>
+          </div>
+        </div>
         <div class="recipesWrapper"></div>
       </main>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/filter.js" type="module"></script>
   </body>
 </html>

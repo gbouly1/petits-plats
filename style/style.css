@@ -3,20 +3,26 @@
   padding: 0;
 }
 
+p,
+span {
+  font-family: "Manrope";
+}
+
 .recipesWrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-evenly;
+  column-gap: 48px;
+  row-gap: 66px;
+  justify-content: center;
 }
 
 .card {
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
   width: 380px;
   height: 730px;
+  overflow: hidden;
 }
 
 .card h3 {
@@ -25,4 +31,8 @@
 
 .card p {
   margin: 10px 0;
+}
+
+.info-recipes {
+  padding: 25px;
 }
