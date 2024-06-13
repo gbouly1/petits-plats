@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style/style.css" />
-    <link href="/dist/output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link href="./styles/output.css" rel="stylesheet" />
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,7 +21,7 @@
   <body>
     <div class="my-0 mx-auto max-w-[1440px]">
       <header
-        class="relative flex flex-col justify-center bg-gray-800 h-[667px] bg-[url('./assets/img/hero-banner.png')]"
+        class="relative flex flex-col justify-center bg-gray-800 h-[667px] bg-[url('/assets/img/hero-banner.png')]"
       >
         <div class="logo absolute top-8 left-8">
           <img src="./assets/img/Logo.png" alt="Logo" />
@@ -54,29 +54,91 @@
       </header>
 
       <main class="bg-[#EDEDED]">
-        <div class="relative inline-block w-64">
-          <button
-            id="dropdownButton"
-            class="bg-white border border-gray-300 text-gray-700 py-2 px-4 w-full rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Ingrédients
-            <span class="float-right">▼</span>
-          </button>
-          <div
-            id="dropdownMenu"
-            class="hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
-          >
-            <div class="p-2">
-              <input
-                type="text"
-                id="searchInput"
-                placeholder="Rechercher..."
-                class="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        <div class="pt-6 pb-12 pl-[104px] flex gap-[65px]">
+          <!-- INGREDIENT DROPDOWN  -->
+
+          <div class="relative inline-block">
+            <button
+              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white border text-[#1B1B1B] font-medium py-2 px-4 w-full rounded-md"
+            >
+              Ingrédients
+              <img
+                class="float-right"
+                src="./assets/svg/arrow-down.svg"
+                alt="Arrow down"
               />
+            </button>
+            <div
+              class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
+            >
+              <div class="p-2">
+                <input
+                  type="text"
+                  placeholder=""
+                  class="searchInput p-2 border border-gray-300 rounded-sm w-full"
+                />
+              </div>
+              <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
+                <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
+              </ul>
             </div>
-            <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
-              <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
-            </ul>
+          </div>
+
+          <!-- APPAREILS DROPDOWN  -->
+
+          <div class="relative inline-block">
+            <button
+              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white text-[#1B1B1B] font-medium py-2 px-4 w-full rounded-md"
+            >
+              Appareils
+              <img
+                class="float-right"
+                src="./assets/svg/arrow-down.svg"
+                alt="Arrow down"
+              />
+            </button>
+            <div
+              class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
+            >
+              <div class="p-2">
+                <input
+                  type="text"
+                  placeholder=""
+                  class="searchInput p-2 border border-gray-300 rounded-sm w-full"
+                />
+              </div>
+              <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
+                <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- USTENSILS DROPDOWN  -->
+          <div class="relative inline-block">
+            <button
+              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white text-[#1B1B1B] font-medium py-2 px-4 w-full rounded-md"
+            >
+              Ustensils
+              <img
+                class="float-right"
+                src="./assets/svg/arrow-down.svg"
+                alt="Arrow down"
+              />
+            </button>
+            <div
+              class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
+            >
+              <div class="p-2">
+                <input
+                  type="text"
+                  placeholder=""
+                  class="searchInput p-2 border border-gray-300 rounded-sm w-full"
+                />
+              </div>
+              <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
+                <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
+              </ul>
+            </div>
           </div>
         </div>
         <div class="recipesWrapper"></div>

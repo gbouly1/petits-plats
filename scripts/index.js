@@ -36,7 +36,6 @@ function displayRecipes(recipes) {
       </div>`
       )
       .join("");
-    console.log(ingredientsList);
 
     card.innerHTML = ` 
     <img class="h-[253px] w-full object-cover overflow-hidden" src="./assets/recettes-img/${recipes[i].image}"/>
