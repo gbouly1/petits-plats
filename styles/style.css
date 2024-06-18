@@ -9,6 +9,10 @@ button {
   font-family: "Manrope";
 }
 
+header {
+  background-image: url("/petits-plats-main/assets/img/hero-banner.png");
+}
+
 .recipesWrapper {
   display: flex;
   flex-wrap: wrap;

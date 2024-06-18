@@ -21,7 +21,7 @@
   <body>
     <div class="my-0 mx-auto max-w-[1440px]">
       <header
-        class="relative flex flex-col justify-center bg-gray-800 h-[667px] bg-[url('/assets/img/hero-banner.png')]"
+        class="relative flex flex-col justify-center bg-gray-800 h-[667px]"
       >
         <div class="logo absolute top-8 left-8">
           <img src="./assets/img/Logo.png" alt="Logo" />
@@ -41,7 +41,7 @@
               class="h-[72px] w-[954px] rounded-lg pl-4 font-['Manrope']"
             />
             <button
-              class="absolute right-0 bg-gray-800 h-12 w-12 rounded-lg right-3 top-3"
+              class="absolute right-3 bg-gray-800 h-12 w-12 rounded-lg top-3"
             >
               <img
                 class="m-auto"
@@ -107,7 +107,7 @@
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
                 />
               </div>
-              <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
+              <ul id="appliancesList" class="max-h-60 overflow-auto p-2">
                 <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
               </ul>
             </div>
@@ -135,7 +135,7 @@
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
                 />
               </div>
-              <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
+              <ul id="ustensilsList" class="max-h-60 overflow-auto p-2">
                 <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
               </ul>
             </div>
@@ -144,7 +144,7 @@
         <div class="recipesWrapper"></div>
       </main>
     </div>
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" type="module"></script>
     <script src="./scripts/filter.js" type="module"></script>
   </body>
 </html>

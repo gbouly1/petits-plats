@@ -1,42 +1,41 @@
+import { fetchItems } from "./index.js";
+
 document.addEventListener("DOMContentLoaded", (event) => {
-  const dropdownButtons = document.querySelectorAll(".dropdownButton");
-  const dropdownMenus = document.querySelectorAll(".dropdownMenu");
-  const searchInputs = document.querySelectorAll(".searchInput");
-  const ingredientsLists = document.querySelectorAll(".ingredientsList");
+  const ingredientsList = document.querySelector("#ingredientsList");
+  const appliancesList = document.querySelector("#appliancesList");
+  const ustensilsList = document.querySelector("#ustensilsList");
 
-  const ingredients = [
-    "Jus de citron",
-    "Glaçons",
-    "Tomate",
-    "Poulet",
-    "Poivron rouge",
-    "Thon en miettes",
-    "Vinaigrette",
-  ];
-
-  function displayIngredients(ingredients, listElement) {
-    listElement.innerHTML = "";
-    ingredients.forEach((ingredient) => {
+  function displayItems(items, listElement) {
+    listElement.innerHTML = ""; // Clear the list first
+    items.forEach((item) => {
       const li = document.createElement("li");
-      li.textContent = ingredient;
+      li.textContent = item;
       li.className = "p-2 cursor-pointer hover:bg-gray-200";
       listElement.appendChild(li);
     });
   }
 
+  // Fetch and display ingredients
+  fetchItems("ingredients").then((ingredients) => {
+    displayItems(ingredients, ingredientsList);
+  });
+
+  // Fetch and display appliances
+  fetchItems("appliances").then((appliances) => {
+    displayItems(appliances, appliancesList);
+  });
+
+  // Fetch and display ustensils
+  fetchItems("ustensils").then((ustensils) => {
+    displayItems(ustensils, ustensilsList);
+  });
+
+  const dropdownButtons = document.querySelectorAll(".dropdownButton");
+  const dropdownMenus = document.querySelectorAll(".dropdownMenu");
+
   dropdownButtons.forEach((button, index) => {
     button.addEventListener("click", () => {
       dropdownMenus[index].classList.toggle("hidden");
-    });
-  });
-
-  searchInputs.forEach((input, index) => {
-    input.addEventListener("input", (e) => {
-      const filter = e.target.value.toLowerCase();
-      const filteredIngredients = ingredients.filter((ingredient) =>
-        ingredient.toLowerCase().includes(filter)
-      );
-      displayIngredients(filteredIngredients, ingredientsLists[index]);
     });
   });
 
@@ -50,7 +49,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
     });
   });
-
-  // Initial display for all dropdowns
-  ingredientsLists.forEach((list) => displayIngredients(ingredients, list));
 });

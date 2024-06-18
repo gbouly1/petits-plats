@@ -17,12 +17,46 @@ function fetchRecipes() {
     );
 }
 
+export async function fetchItems(type) {
+  return fetch("recipes.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (type === "ingredients") {
+        let ingredients = data.recipes.flatMap((recipe) =>
+          recipe.ingredients.map((ingredient) => ingredient.ingredient)
+        );
+        const uniqueIngredients = [...new Set(ingredients)];
+        return uniqueIngredients;
+      } else if (type === "ustensils") {
+        let ustensils = data.recipes.flatMap((recipe) => recipe.ustensils);
+        const uniqueUstensils = [...new Set(ustensils)];
+        return uniqueUstensils;
+      } else if (type === "appliances") {
+        let appliances = data.recipes.flatMap((recipe) => recipe.appliance);
+        const uniqueAppliances = [...new Set(appliances)];
+        return uniqueAppliances;
+      } else {
+        console.error("Invalid type specified");
+      }
+    })
+    .catch((error) =>
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      )
+    );
+}
+
 function displayRecipes(recipes) {
   const recipesWrapper = document.querySelector(".recipesWrapper");
   for (let i = 0; i < recipes.length; i++) {
     const card = document.createElement("div");
     card.className = "card";
-
     const ingredientsList = recipes[i].ingredients
       .map(
         (ingredient) =>
