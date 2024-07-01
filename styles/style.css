@@ -41,3 +41,7 @@ header {
 .info-recipes {
   padding: 25px;
 }
+
+.rotate {
+  transform: rotateX(180deg);
+}

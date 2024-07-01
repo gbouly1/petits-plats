@@ -1,90 +1,24 @@
-function fetchRecipes() {
-  fetch("recipes.json")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      displayRecipes(data.recipes);
-    })
-    .catch((error) =>
-      console.error(
-        "There has been a problem with your fetch operation:",
-        error
-      )
-    );
-}
+// index.js
 
-export async function fetchItems(type) {
-  return fetch("recipes.json")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if (type === "ingredients") {
-        let ingredients = data.recipes.flatMap((recipe) =>
-          recipe.ingredients.map((ingredient) => ingredient.ingredient)
-        );
-        const uniqueIngredients = [...new Set(ingredients)];
-        return uniqueIngredients;
-      } else if (type === "ustensils") {
-        let ustensils = data.recipes.flatMap((recipe) => recipe.ustensils);
-        const uniqueUstensils = [...new Set(ustensils)];
-        return uniqueUstensils;
-      } else if (type === "appliances") {
-        let appliances = data.recipes.flatMap((recipe) => recipe.appliance);
-        const uniqueAppliances = [...new Set(appliances)];
-        return uniqueAppliances;
-      } else {
-        console.error("Invalid type specified");
-      }
-    })
-    .catch((error) =>
-      console.error(
-        "There has been a problem with your fetch operation:",
-        error
-      )
-    );
-}
+import { fetchRecipes } from "./api/fetch.js";
+import { displayRecipes } from "./ui/display.js";
+import { searchRecipes } from "./api/search.js";
+import "./ui/filter.js";
+import "./ui/dropdown.js";
 
-function displayRecipes(recipes) {
-  const recipesWrapper = document.querySelector(".recipesWrapper");
-  for (let i = 0; i < recipes.length; i++) {
-    const card = document.createElement("div");
-    card.className = "card";
-    const ingredientsList = recipes[i].ingredients
-      .map(
-        (ingredient) =>
-          `<div class="ingredient flex flex-col">
-          <span class="ingredient-name text-[14px]">${
-            ingredient.ingredient
-          }</span>
-          <span class="ingredient-quantity text-[14px] text-[#7A7A7A]">${
-            ingredient.quantity || ""
-          } ${ingredient.unit || ""}</span>
-      </div>`
-      )
-      .join("");
+document.addEventListener("DOMContentLoaded", () => {
+  // Initial fetch and display of recipes
+  fetchRecipes().then((data) => {
+    displayRecipes(data.recipes);
+  });
 
-    card.innerHTML = ` 
-    <img class="h-[253px] w-full object-cover overflow-hidden" src="./assets/recettes-img/${recipes[i].image}"/>
-    <div class="info-recipes">
-    <h4 class="font-[Anton] text-[18px] line-clamp-1"> ${recipes[i].name} </h4> 
-    <p class="uppercase tracking-[1.8px] text-[12px] font-bold text-[#7A7A7A] pt-3 pb-2"> Recette </p>
-    <p class="text-[14px] line-clamp-4">${recipes[i].description}</p>
-    <p class="uppercase tracking-[1.8px] text-[12px] font-bold text-[#7A7A7A] pt-6 pb-2"> Ingrédients </p>
-    <div class="ingredients grid grid-cols-2 gap-x-[35px] gap-y-[20px]">${ingredientsList}</div>
-    </div>
-    `;
-
-    // on ajoute les éléments a la card
-    recipesWrapper.appendChild(card);
-  }
-}
-// Appeler la fonction pour récupérer les données
-fetchRecipes();
+  // Main search logic
+  document.getElementById("search").addEventListener("input", function (e) {
+    const query = e.target.value;
+    if (query.length >= 3 || query.length === 0) {
+      searchRecipes(query, selectedTags).then((filteredRecipes) => {
+        displayRecipes(filteredRecipes);
+      });
+    }
+  });
+});
