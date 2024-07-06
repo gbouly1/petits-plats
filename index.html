@@ -69,7 +69,7 @@
               />
             </button>
             <div
-              class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
+              class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10 m-0"
             >
               <div class="p-2">
                 <input
@@ -78,7 +78,7 @@
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
                 />
               </div>
-              <ul id="ingredientsList" class="max-h-60 overflow-auto p-2">
+              <ul id="ingredientsList" class="max-h-60 overflow-auto">
                 <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
               </ul>
             </div>
@@ -107,7 +107,7 @@
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
                 />
               </div>
-              <ul id="appliancesList" class="max-h-60 overflow-auto p-2">
+              <ul id="appliancesList" class="max-h-60 overflow-auto">
                 <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
               </ul>
             </div>
@@ -135,12 +135,13 @@
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
                 />
               </div>
-              <ul id="ustensilsList" class="max-h-60 overflow-auto p-2">
+              <ul id="ustensilsList" class="max-h-60 overflow-auto">
                 <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
               </ul>
             </div>
           </div>
         </div>
+        <div class="selectedTagsWrapper"></div>
         <div class="recipesWrapper"></div>
       </main>
     </div>
@@ -150,5 +151,6 @@
     <script src="./scripts/ui/filter.js" type="module"></script>
     <script src="./scripts/api/fetch.js" type="module"></script>
     <script src="./scripts/api/search.js" type="module"></script>
+    <script src="./scripts/utils.js" type="module"></script>
   </body>
 </html>

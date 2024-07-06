@@ -1,23 +1,21 @@
 // api/fetch.js
+import { normalizeString } from "../utils.js";
 
-export function fetchRecipes() {
-  return fetch("recipes.json")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .catch((error) =>
-      console.error(
-        "There has been a problem with your fetch operation:",
-        error
-      )
-    );
+export async function fetchRecipes() {
+  try {
+    const response = await fetch("recipes.json");
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+  }
 }
 
-export function fetchItems(type) {
-  return fetchRecipes().then((data) => {
+export async function fetchItems(type) {
+  try {
+    const data = await fetchRecipes();
     if (type === "ingredients") {
       let ingredients = data.recipes.flatMap((recipe) =>
         recipe.ingredients.map((ingredient) =>
@@ -38,12 +36,8 @@ export function fetchItems(type) {
     } else {
       throw new Error("Invalid type specified");
     }
-  });
-}
-
-function normalizeString(str) {
-  return str
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, ""); // Remove accents
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+    return []; // Return an empty array in case of error
+  }
 }

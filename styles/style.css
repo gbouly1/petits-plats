@@ -45,3 +45,26 @@ header {
 .rotate {
   transform: rotateX(180deg);
 }
+
+.selectedTagsWrapper {
+  display: flex;
+  padding-left: 104px;
+  gap: 15px;
+  margin-bottom: 45px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 203px;
+  height: 53px;
+  border-radius: 10px;
+  background: #ffd15b;
+}
+
+#ingredientsList li:hover,
+#appliancesList li:hover,
+#ustensilsList li:hover {
+  background-color: #ffd15b;
+}

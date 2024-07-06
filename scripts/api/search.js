@@ -1,6 +1,7 @@
 // api/search.js
 
 import { fetchRecipes } from "./fetch.js";
+import { normalizeString } from "../utils.js";
 
 export function searchRecipes(query, selectedTags) {
   const normalizedQuery = normalizeString(query);
@@ -38,11 +39,4 @@ export function searchRecipes(query, selectedTags) {
       return matchesMainSearch && matchesTags;
     });
   });
-}
-
-function normalizeString(str) {
-  return str
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, ""); // Remove accents
 }

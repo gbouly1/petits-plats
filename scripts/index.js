@@ -3,6 +3,7 @@
 import { fetchRecipes } from "./api/fetch.js";
 import { displayRecipes } from "./ui/display.js";
 import { searchRecipes } from "./api/search.js";
+import { selectedTags } from "./utils.js";
 import "./ui/filter.js";
 import "./ui/dropdown.js";
 
