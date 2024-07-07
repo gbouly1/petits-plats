@@ -28,7 +28,7 @@
         </div>
         <div class="wrapper-hero flex flex-col items-center gap-5">
           <h1
-            class="text-[#FFD15B] text-4xl font-['Anton'] max-w-[550px] text-center leading-normal"
+            class="text-[#FFD15B] font-['Anton'] max-w-[700px] text-center leading-normal text-[44px]"
           >
             Cherchez parmi plus de 1500 recettes du quotidien, simples et
             délicieuses
@@ -63,7 +63,7 @@
             >
               Ingrédients
               <img
-                class="float-right"
+                class="float-right transform transition-transform duration-200"
                 src="./assets/svg/arrow-down.svg"
                 alt="Arrow down"
               />
@@ -92,7 +92,7 @@
             >
               Appareils
               <img
-                class="float-right"
+                class="float-right arrowDown"
                 src="./assets/svg/arrow-down.svg"
                 alt="Arrow down"
               />
@@ -120,7 +120,7 @@
             >
               Ustensils
               <img
-                class="float-right"
+                class="float-right arrowDown"
                 src="./assets/svg/arrow-down.svg"
                 alt="Arrow down"
               />
@@ -148,7 +148,9 @@
           </div>
         </div>
         <div class="selectedTagsWrapper"></div>
-        <div class="recipesWrapper"></div>
+        <div
+          class="recipesWrapper pb-[100px] recipesWrapper grid grid-cols-3 pl-[104px] gap-y-16"
+        ></div>
       </main>
     </div>
     <script src="./scripts/index.js" type="module"></script>

@@ -13,13 +13,13 @@ header {
   background-image: url("/assets/img/hero-banner.png");
 }
 
-.recipesWrapper {
+/* .recipesWrapper {
   display: flex;
   flex-wrap: wrap;
   column-gap: 48px;
   row-gap: 66px;
   justify-content: center;
-}
+} */
 
 .card {
   background-color: #fff;

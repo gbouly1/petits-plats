@@ -2,8 +2,7 @@
 
 import { fetchItems, fetchRecipes } from "../api/fetch.js";
 import { displayRecipes, displaySelectedTags } from "./display.js";
-import { normalizeString } from "../utils.js";
-import { selectedTags } from "../utils.js";
+import { normalizeString, selectedTags } from "../utils.js";
 
 document.addEventListener("DOMContentLoaded", (event) => {
   const ingredientsList = document.querySelector("#ingredientsList");
