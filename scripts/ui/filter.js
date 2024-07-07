@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       listElement.appendChild(li);
 
       li.addEventListener("click", () => {
-        addTag(normalizeString(item), type); // Pass the correct type explicitly
+        addTag(item, type); // Use the original item string
         console.log(`Clicked on: ${item}, Type: ${type}`);
       });
     });
@@ -53,12 +53,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const recipe = data.recipes[i];
       const normalizedTitle = normalizeString(recipe.name);
       const normalizedDescription = normalizeString(recipe.description);
-      const normalizedIngredients = [];
-      for (let j = 0; j < recipe.ingredients.length; j++) {
-        normalizedIngredients.push(
-          normalizeString(recipe.ingredients[j].ingredient)
-        );
-      }
+      const normalizedIngredients = recipe.ingredients.map((ingredient) =>
+        normalizeString(ingredient.ingredient)
+      );
 
       const matchesMainSearch =
         query === "" ||
@@ -76,14 +73,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
             normalizeString(recipe.appliance)
           )) &&
         (selectedTags.ustensils.length === 0 ||
-          selectedTags.ustensils.every((tag) => {
-            for (let k = 0; k < recipe.ustensils.length; k++) {
-              if (normalizeString(recipe.ustensils[k]).includes(tag)) {
-                return true;
-              }
-            }
-            return false;
-          }));
+          selectedTags.ustensils.every((tag) =>
+            recipe.ustensils
+              .map((ustensil) => normalizeString(ustensil))
+              .includes(tag)
+          ));
 
       if (matchesMainSearch && matchesTags) {
         filteredRecipes.push(recipe);
