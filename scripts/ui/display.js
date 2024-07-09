@@ -14,7 +14,7 @@ export function displayRecipes(recipes) {
 
   recipes.forEach((recipe) => {
     const card = document.createElement("div");
-    card.className = "card";
+    card.className = "card relative";
     const ingredientsList = recipe.ingredients
       .map(
         (ingredient) =>
@@ -31,6 +31,7 @@ export function displayRecipes(recipes) {
 
     card.innerHTML = `
       <img class="h-[253px] w-full object-cover overflow-hidden" src="./assets/recettes-img/${recipe.image}"/>
+      <p class="timer">${recipe.time}min</p>
       <div class="info-recipes">
       <h4 class="font-[Anton] text-[18px] line-clamp-1"> ${recipe.name} </h4>
       <p class="uppercase tracking-[1.8px] text-[12px] font-bold text-[#7A7A7A] pt-3 pb-2"> Recette </p>

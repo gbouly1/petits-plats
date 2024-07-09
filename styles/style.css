@@ -68,3 +68,17 @@ header {
 #ustensilsList li:hover {
   background-color: #ffd15b;
 }
+
+.timer {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 25px;
+  border-radius: 14px;
+  background: #ffd15b;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+}
