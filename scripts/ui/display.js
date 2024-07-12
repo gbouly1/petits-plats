@@ -1,13 +1,16 @@
 // ui/display.js
 
 export function displayRecipes(recipes) {
+  const main = document.querySelector("main");
   const recipesWrapper = document.querySelector(".recipesWrapper");
+  const searchValue = document.getElementById("search");
   recipesWrapper.innerHTML = ""; // Clear previous results
 
   if (recipes.length === 0) {
     const noResultsMessage = document.createElement("p");
+    noResultsMessage.classList.add("noResultsMessage");
     noResultsMessage.textContent =
-      "Aucune recette ne correspond à votre recherche.";
+      "Aucune recette ne contient " + searchValue.value;
     recipesWrapper.appendChild(noResultsMessage);
     return;
   }
@@ -56,7 +59,7 @@ export function displaySelectedTags(tags, removeTagCallback) {
       tagElement.innerHTML = `<p class=""> ${tag}</p>`;
       const removeButton = document.createElement("button");
       removeButton.innerHTML = `<img
-      class = "stroke-[##1B1B1B] stroke-3"
+      class = "stroke-[#1B1B1B] stroke-3"
                 src="./assets/svg/cross.svg"
                 alt="Croix"
               />`;

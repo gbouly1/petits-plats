@@ -41,6 +41,8 @@
               class="h-[72px] w-[954px] rounded-lg pl-4 font-['Manrope']"
             />
             <button
+              id="main-button"
+              type="submit"
               class="absolute right-3 bg-gray-800 h-12 w-12 rounded-lg top-3"
             >
               <img
@@ -53,13 +55,14 @@
         </div>
       </header>
 
-      <main class="bg-[#EDEDED]">
-        <div class="pt-6 pb-12 pl-[104px] flex gap-[65px]">
+      <main class="bg-[#EDEDED] pl-[104px] pr-[104px]">
+        <div class="pt-6 pb-12 flex gap-[65px] relative flex items-center">
+          <div class="total-recette"></div>
           <!-- INGREDIENT DROPDOWN  -->
 
           <div class="relative inline-block">
             <button
-              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white border text-[#1B1B1B] font-medium py-2 px-4 w-full rounded-md"
+              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white border text-[#1B1B1B] py-2 px-4 w-full rounded-md font-['Manrope']"
             >
               Ingrédients
               <img
@@ -71,11 +74,16 @@
             <div
               class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10 m-0"
             >
-              <div class="p-2">
+              <div class="p-2 relative">
                 <input
                   type="search"
                   placeholder=""
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
+                />
+                <img
+                  class="glass"
+                  src="./assets/svg/loupe-gray.svg"
+                  alt="Loupe"
                 />
               </div>
               <ul id="ingredientsList" class="max-h-60 overflow-auto">
@@ -88,7 +96,7 @@
 
           <div class="relative inline-block">
             <button
-              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white text-[#1B1B1B] font-medium py-2 px-4 w-full rounded-md"
+              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white text-[#1B1B1B] font-['Manrope'] py-2 px-4 w-full rounded-md"
             >
               Appareils
               <img
@@ -100,11 +108,16 @@
             <div
               class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
             >
-              <div class="p-2">
+              <div class="p-2 relative">
                 <input
                   type="search"
                   placeholder=""
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
+                />
+                <img
+                  class="glass"
+                  src="./assets/svg/loupe-gray.svg"
+                  alt="Loupe"
                 />
               </div>
               <ul id="appliancesList" class="max-h-60 overflow-auto">
@@ -116,7 +129,7 @@
           <!-- USTENSILS DROPDOWN  -->
           <div class="relative inline-block">
             <button
-              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white text-[#1B1B1B] font-medium py-2 px-4 w-full rounded-md"
+              class="h-[56px] items-center flex gap-[63px] dropdownButton bg-white text-[#1B1B1B] font-['Manrope'] py-2 px-4 w-full rounded-md"
             >
               Ustensils
               <img
@@ -128,19 +141,18 @@
             <div
               class="dropdownMenu hidden absolute mt-1 w-full rounded-md bg-white shadow-lg z-10"
             >
-              <div class="p-2">
+              <div class="p-2 relative">
                 <input
                   type="search"
                   placeholder=""
                   class="searchInput p-2 border border-gray-300 rounded-sm w-full"
                 />
+                <img
+                  class="glass"
+                  src="./assets/svg/loupe-gray.svg"
+                  alt="Loupe"
+                />
               </div>
-              <button class="buttonClear clear-button hidden">x</button>
-              <img
-                class="absolute right-3 top-3 h-8 w-8 rounded-full clear-button stroke-1"
-                src="./assets/svg/loupe-gray.svg"
-                alt="Loupe"
-              />
               <ul id="ustensilsList" class="max-h-60 overflow-auto">
                 <!-- Les éléments de la liste seront ajoutés ici par JavaScript -->
               </ul>
@@ -149,7 +161,7 @@
         </div>
         <div class="selectedTagsWrapper"></div>
         <div
-          class="recipesWrapper pb-[100px] recipesWrapper grid grid-cols-3 pl-[104px] gap-y-16"
+          class="recipesWrapper pb-[100px] recipesWrapper grid grid-cols-3 gap-y-16 gap-x-11"
         ></div>
       </main>
     </div>

@@ -3,7 +3,7 @@
 import { fetchRecipes } from "./fetch.js";
 import { normalizeString } from "../utils.js";
 
-export function searchRecipes(query, selectedTags) {
+export async function searchRecipes(query, selectedTags) {
   const normalizedQuery = normalizeString(query);
 
   return fetchRecipes().then((data) => {

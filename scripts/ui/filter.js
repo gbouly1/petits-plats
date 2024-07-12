@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       li.addEventListener("click", () => {
         addTag(item, type); // Use the original item string
-        console.log(`Clicked on: ${item}, Type: ${type}`);
+        console.log(item);
       });
     });
   }
@@ -31,6 +31,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
       selectedTags[type].push(tag);
       updateRecipes();
       displaySelectedTags(selectedTags, removeTag);
+
+      // Move the selected item to the top and remove it from the suggestions list
+      const listElement =
+        type === "ingredients"
+          ? ingredientsList
+          : type === "appliances"
+          ? appliancesList
+          : ustensilsList;
+      displayItems(
+        selectedTags[type].concat(
+          [...listElement.querySelectorAll("li")]
+            .map((li) => li.textContent)
+            .filter((item) => item !== tag)
+        ),
+        listElement,
+        type
+      );
     }
   }
 
@@ -40,12 +57,28 @@ document.addEventListener("DOMContentLoaded", (event) => {
       selectedTags[type].splice(index, 1);
       updateRecipes();
       displaySelectedTags(selectedTags, removeTag); // Update the display of selected tags
+
+      // Re-fetch and display the items to include the removed tag again
+      fetchItems(type).then((items) => {
+        displayItems(
+          selectedTags[type].concat(
+            items.filter((item) => !selectedTags[type].includes(item))
+          ),
+          type === "ingredients"
+            ? ingredientsList
+            : type === "appliances"
+            ? appliancesList
+            : ustensilsList,
+          type
+        );
+      });
     }
   }
 
   async function updateRecipes() {
     const query = normalizeString(mainSearch.value);
     const data = await fetchRecipes();
+
     const filteredRecipes = [];
 
     for (let i = 0; i < data.recipes.length; i++) {
@@ -55,12 +88,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const normalizedIngredients = recipe.ingredients.map((ingredient) =>
         normalizeString(ingredient.ingredient)
       );
+      const normalizedAppliance = normalizeString(recipe.appliance);
+      const normalizedUstensils = recipe.ustensils.map((ustensil) =>
+        normalizeString(ustensil)
+      );
 
       const matchesMainSearch =
         query === "" ||
         normalizedTitle.includes(query) ||
         normalizedDescription.includes(query) ||
-        normalizedIngredients.some((ingredient) => ingredient.includes(query));
+        normalizedIngredients.some((ingredient) =>
+          ingredient.includes(query)
+        ) ||
+        normalizedAppliance.includes(query) ||
+        normalizedUstensils.some((ustensil) => ustensil.includes(query));
 
       const matchesTags =
         (selectedTags.ingredients.length === 0 ||
@@ -68,14 +109,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
             normalizedIngredients.includes(tag)
           )) &&
         (selectedTags.appliances.length === 0 ||
-          selectedTags.appliances.includes(
-            normalizeString(recipe.appliance)
-          )) &&
+          selectedTags.appliances.includes(normalizedAppliance)) &&
         (selectedTags.ustensils.length === 0 ||
           selectedTags.ustensils.every((tag) =>
-            recipe.ustensils
-              .map((ustensil) => normalizeString(ustensil))
-              .includes(tag)
+            normalizedUstensils.includes(tag)
           ));
 
       if (matchesMainSearch && matchesTags) {
@@ -84,6 +121,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     displayRecipes(filteredRecipes);
+    renderTotal(filteredRecipes);
+  }
+
+  //nombre total de recettes
+  function renderTotal(array) {
+    if (!Array.isArray(array)) {
+      console.error("L'argument passé à renderTotal n'est pas un tableau.");
+      return;
+    }
+
+    // Sélectionne l'élément pour afficher le total de recettes
+    const totalRecipes = document.querySelector(".total-recette");
+    if (!totalRecipes) {
+      console.error("L'élément .total-recette n'a pas été trouvé.");
+      return;
+    }
+
+    // Calcule le nombre total de recettes dans le tableau passé en argument
+    let total = array.length;
+    if (total <= 1) {
+      totalRecipes.textContent = total + " recette";
+    } else {
+      totalRecipes.textContent = total + " recettes";
+    }
   }
 
   async function initialize() {
@@ -96,7 +157,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     displayItems(ustensils, ustensilsList, "ustensils");
 
     const recipes = await fetchRecipes();
-    displayRecipes(recipes.recipes);
+    if (recipes && recipes.recipes) {
+      displayRecipes(recipes.recipes);
+      renderTotal(recipes.recipes);
+    } else {
+      console.error("Les recettes n'ont pas pu être récupérées.");
+    }
   }
 
   initialize();
