@@ -1,4 +1,4 @@
-// ui/dropdown.js
+// scripts/ui/dropdown/dropdown.js
 
 document.addEventListener("DOMContentLoaded", () => {
   const dropdownButtons = document.querySelectorAll(".dropdownButton");

@@ -1,11 +1,11 @@
-// index.js
+// scripts/index.js
 
 import { fetchRecipes } from "./api/fetch.js";
-import { displayRecipes } from "./ui/display.js";
+import { displayRecipes } from "./ui/display/displayRecipes.js";
 import { searchRecipes } from "./api/search.js";
 import { selectedTags } from "./utils.js";
-import "./ui/filter.js";
-import "./ui/dropdown.js";
+import "./ui/filter/filter.js";
+import "./ui/dropdown/dropdown.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   // Initial fetch and display of recipes

@@ -1,6 +1,4 @@
-// utils.js
-const mainButton = document.getElementById("main-button");
-console.log(mainButton.value);
+// scripts/utils.js
 
 export function normalizeString(str) {
   return str

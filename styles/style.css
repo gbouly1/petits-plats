@@ -55,6 +55,19 @@ header {
   background: #ffd15b;
 }
 
+.clickedWrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0 0 15px 0;
+  gap: 5px;
+}
+
+.fullCross {
+  position: absolute;
+  right: 15px;
+}
+
 #ingredientsList li:hover,
 #appliancesList li:hover,
 #ustensilsList li:hover {
@@ -140,4 +153,15 @@ input#search::-webkit-search-cancel-button {
 
 .max-h-60::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+.clicked-item {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 0.5rem;
+  background: #ffd15b;
+}
+
+.clicked-item:hover {
+  font-weight: bold;
 }
