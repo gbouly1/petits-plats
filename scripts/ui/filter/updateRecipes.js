@@ -10,8 +10,7 @@ export async function updateRecipes() {
   const filteredRecipes = [];
 
   // Parcourt chaque recette pour appliquer les filtres et la recherche
-  for (let i = 0; i < data.recipes.length; i++) {
-    const recipe = data.recipes[i];
+  data.recipes.forEach((recipe) => {
     const normalizedTitle = normalizeString(recipe.name);
     const normalizedDescription = normalizeString(recipe.description);
     const normalizedIngredients = recipe.ingredients.map((ingredient) =>
@@ -48,7 +47,7 @@ export async function updateRecipes() {
     if (matchesMainSearch && matchesTags) {
       filteredRecipes.push(recipe);
     }
-  }
+  });
 
   displayRecipes(filteredRecipes); // Affiche les recettes filtrées
   renderTotal(filteredRecipes); // Affiche le total des recettes filtrées
