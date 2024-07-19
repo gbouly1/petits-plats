@@ -7,16 +7,18 @@ import { selectedTags } from "./utils.js";
 import "./ui/filter/filter.js";
 import "./ui/dropdown/dropdown.js";
 
+// Ajout d'un écouteur d'événements pour s'assurer que le DOM est complètement chargé
 document.addEventListener("DOMContentLoaded", () => {
-  // Initial fetch and display of recipes
+  // Récupère et affiche les recettes initiales
   fetchRecipes().then((data) => {
     displayRecipes(data.recipes);
   });
 
-  // Main search logic
+  // Logique de recherche principale
   document.getElementById("search").addEventListener("input", function (e) {
-    const query = e.target.value;
+    const query = e.target.value; // Récupère la valeur de l'input de recherche
     if (query.length >= 3 || query.length === 0) {
+      // Si la longueur de la recherche est >= 3 ou égale à 0
       searchRecipes(query, selectedTags).then((filteredRecipes) => {
         displayRecipes(filteredRecipes);
       });

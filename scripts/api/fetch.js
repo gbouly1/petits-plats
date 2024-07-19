@@ -1,6 +1,7 @@
 // api/fetch.js
 import { normalizeString } from "../utils.js";
 
+// fetch les recettes de recipes.json
 export async function fetchRecipes() {
   try {
     const response = await fetch("recipes.json");
@@ -13,10 +14,12 @@ export async function fetchRecipes() {
   }
 }
 
+// fetch les items d'un type spécifique (ingrédients, ustensils, appliances)
 export async function fetchItems(type) {
   try {
     const data = await fetchRecipes();
     if (type === "ingredients") {
+      // si le type est ingrédients, normalize et return unique ingrédients
       let ingredients = data.recipes.flatMap((recipe) =>
         recipe.ingredients.map((ingredient) =>
           normalizeString(ingredient.ingredient)

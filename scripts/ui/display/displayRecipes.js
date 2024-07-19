@@ -1,11 +1,10 @@
-// scripts/ui/display/displayRecipes.js
-
+// Fonction pour afficher les recettes sur la page
 export function displayRecipes(recipes) {
-  const main = document.querySelector("main");
   const recipesWrapper = document.querySelector(".recipesWrapper");
   const searchValue = document.getElementById("search");
-  recipesWrapper.innerHTML = ""; // Clear previous results
+  recipesWrapper.innerHTML = "";
 
+  // Si aucune recette n'est trouvée, affiche un message
   if (recipes.length === 0) {
     const noResultsMessage = document.createElement("p");
     noResultsMessage.classList.add("noResultsMessage");
@@ -15,9 +14,12 @@ export function displayRecipes(recipes) {
     return;
   }
 
+  // Parcourt chaque recette et crée un élément de carte pour l'afficher
   recipes.forEach((recipe) => {
     const card = document.createElement("div");
     card.className = "card relative";
+
+    // Crée une liste d'ingrédients pour chaque recette
     const ingredientsList = recipe.ingredients
       .map(
         (ingredient) =>
@@ -32,6 +34,7 @@ export function displayRecipes(recipes) {
       )
       .join("");
 
+    // Définit le contenu HTML de la carte avec les détails de la recette
     card.innerHTML = `
       <img class="h-[253px] w-full object-cover overflow-hidden" src="./assets/recettes-img/${recipe.image}"/>
       <p class="timer">${recipe.time}min</p>

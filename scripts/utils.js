@@ -12,3 +12,4 @@ export const selectedTags = {
   appliances: [],
   ustensils: [],
 };
+// console.log(selectedTags);

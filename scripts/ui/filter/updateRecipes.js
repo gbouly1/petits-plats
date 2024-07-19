@@ -1,15 +1,15 @@
-// scripts/ui/filter/updateRecipes.js
-
 import { fetchRecipes } from "../../api/fetch.js";
 import { displayRecipes } from "../display/displayRecipes.js";
 import { normalizeString, selectedTags } from "../../utils.js";
 
+// Fonction asynchrone pour mettre à jour les recettes affichées en fonction des filtres et de la recherche
 export async function updateRecipes() {
   const query = normalizeString(document.getElementById("search").value);
-  const data = await fetchRecipes();
+  const data = await fetchRecipes(); // Récupère les recettes
 
   const filteredRecipes = [];
 
+  // Parcourt chaque recette pour appliquer les filtres et la recherche
   for (let i = 0; i < data.recipes.length; i++) {
     const recipe = data.recipes[i];
     const normalizedTitle = normalizeString(recipe.name);
@@ -22,6 +22,7 @@ export async function updateRecipes() {
       normalizeString(ustensil)
     );
 
+    // Vérifie si la recette correspond à la recherche principale
     const matchesMainSearch =
       query === "" ||
       normalizedTitle.includes(query) ||
@@ -30,6 +31,7 @@ export async function updateRecipes() {
       normalizedAppliance.includes(query) ||
       normalizedUstensils.some((ustensil) => ustensil.includes(query));
 
+    // Vérifie si la recette correspond aux tags sélectionnés
     const matchesTags =
       (selectedTags.ingredients.length === 0 ||
         selectedTags.ingredients.every((tag) =>
@@ -42,15 +44,17 @@ export async function updateRecipes() {
           normalizedUstensils.includes(tag)
         ));
 
+    // Si la recette correspond à la recherche principale et aux tags, elle est ajoutée aux recettes filtrées
     if (matchesMainSearch && matchesTags) {
       filteredRecipes.push(recipe);
     }
   }
 
-  displayRecipes(filteredRecipes);
-  renderTotal(filteredRecipes);
+  displayRecipes(filteredRecipes); // Affiche les recettes filtrées
+  renderTotal(filteredRecipes); // Affiche le total des recettes filtrées
 }
 
+// Fonction pour afficher le nombre total de recettes filtrées
 function renderTotal(array) {
   if (!Array.isArray(array)) {
     console.error("L'argument passé à renderTotal n'est pas un tableau.");
@@ -64,5 +68,5 @@ function renderTotal(array) {
   }
 
   let total = array.length;
-  totalRecipes.textContent = total + (total <= 1 ? " recette" : " recettes");
+  totalRecipes.textContent = total + (total <= 1 ? " recette" : " recettes"); // Affiche le nombre de recettes avec une gestion du singulier/pluriel
 }

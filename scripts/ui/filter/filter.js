@@ -1,11 +1,11 @@
-// scripts/ui/filter/filter.js
-
+// Import des fonctions et des constantes nécessaires
 import { fetchItems, fetchRecipes } from "../../api/fetch.js";
 import { displayRecipes } from "../display/displayRecipes.js";
 import { normalizeString, selectedTags } from "../../utils.js";
 import { updateRecipes } from "./updateRecipes.js";
 import { addTag, removeTag } from "./tags.js";
 
+// Fonction exécutée lorsque le DOM est complètement chargé
 document.addEventListener("DOMContentLoaded", (event) => {
   const ingredientsList = document.querySelector("#ingredientsList");
   const appliancesList = document.querySelector("#appliancesList");
@@ -14,14 +14,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
   const mainSearch = document.getElementById("search");
 
   async function initialize() {
+    // Récupération des ingrédients, appareils et ustensiles
     const ingredients = await fetchItems("ingredients");
     const appliances = await fetchItems("appliances");
     const ustensils = await fetchItems("ustensils");
 
+    // Affichage des éléments récupérés dans les listes correspondantes
     displayItems(ingredients, ingredientsList, "ingredients");
     displayItems(appliances, appliancesList, "appliances");
     displayItems(ustensils, ustensilsList, "ustensils");
 
+    // Récupération et affichage des recettes
     const recipes = await fetchRecipes();
     if (recipes && recipes.recipes) {
       displayRecipes(recipes.recipes);
@@ -33,12 +36,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   initialize();
 
+  // Écouteur d'événements pour la barre de recherche principale
   mainSearch.addEventListener("input", function (e) {
     if (e.target.value.length >= 3 || e.target.value.length === 0) {
       updateRecipes();
     }
   });
 
+  // Écouteurs d'événements pour les barres de recherche des filtres
   for (let i = 0; i < searchInputs.length; i++) {
     searchInputs[i].addEventListener("input", async function (e) {
       const filter = normalizeString(e.target.value);
@@ -78,12 +83,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 });
 
+// Fonction pour afficher les éléments dans la liste appropriée
 export function displayItems(items, listElement, type) {
-  listElement.innerHTML = ""; // Clear the list first
+  listElement.innerHTML = "";
   const clickedWrapper = document.createElement("div");
   clickedWrapper.className = "clickedWrapper";
 
-  // Add selected tags to the top of the list
+  // Ajout des tags sélectionnés en haut de la liste
   selectedTags[type].forEach((tag) => {
     const li = document.createElement("li");
     li.textContent = tag;
@@ -100,11 +106,12 @@ export function displayItems(items, listElement, type) {
 
   listElement.appendChild(clickedWrapper);
 
-  // Filter out selected tags from items
+  // Filtre les items déjà sélectionnés
   const filteredItems = items.filter(
     (item) => !selectedTags[type].includes(item)
   );
 
+  // Ajoute les items filtrés à la liste
   filteredItems.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
@@ -118,6 +125,7 @@ export function displayItems(items, listElement, type) {
   });
 }
 
+// Fonction pour afficher le nombre total de recettes
 function renderTotal(array) {
   if (!Array.isArray(array)) {
     console.error("L'argument passé à renderTotal n'est pas un tableau.");
