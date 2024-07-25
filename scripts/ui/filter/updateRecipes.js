@@ -1,8 +1,9 @@
+// scripts/ui/filter/updateRecipes.js
+
 import { fetchRecipes } from "../../api/fetch.js";
 import { displayRecipes } from "../display/displayRecipes.js";
 import { normalizeString, selectedTags } from "../../utils.js";
 
-// Fonction asynchrone pour mettre à jour les recettes affichées en fonction des filtres et de la recherche
 export async function updateRecipes() {
   const query = normalizeString(document.getElementById("search").value);
   const data = await fetchRecipes(); // Récupère les recettes
@@ -16,19 +17,13 @@ export async function updateRecipes() {
     const normalizedIngredients = recipe.ingredients.map((ingredient) =>
       normalizeString(ingredient.ingredient)
     );
-    const normalizedAppliance = normalizeString(recipe.appliance);
-    const normalizedUstensils = recipe.ustensils.map((ustensil) =>
-      normalizeString(ustensil)
-    );
 
     // Vérifie si la recette correspond à la recherche principale
     const matchesMainSearch =
       query === "" ||
       normalizedTitle.includes(query) ||
       normalizedDescription.includes(query) ||
-      normalizedIngredients.some((ingredient) => ingredient.includes(query)) ||
-      normalizedAppliance.includes(query) ||
-      normalizedUstensils.some((ustensil) => ustensil.includes(query));
+      normalizedIngredients.some((ingredient) => ingredient.includes(query));
 
     // Vérifie si la recette correspond aux tags sélectionnés
     const matchesTags =
@@ -37,10 +32,10 @@ export async function updateRecipes() {
           normalizedIngredients.includes(tag)
         )) &&
       (selectedTags.appliances.length === 0 ||
-        selectedTags.appliances.includes(normalizedAppliance)) &&
+        selectedTags.appliances.includes(normalizeString(recipe.appliance))) &&
       (selectedTags.ustensils.length === 0 ||
         selectedTags.ustensils.every((tag) =>
-          normalizedUstensils.includes(tag)
+          recipe.ustensils.map(normalizeString).includes(tag)
         ));
 
     // Si la recette correspond à la recherche principale et aux tags, elle est ajoutée aux recettes filtrées
@@ -53,7 +48,6 @@ export async function updateRecipes() {
   renderTotal(filteredRecipes); // Affiche le total des recettes filtrées
 }
 
-// Fonction pour afficher le nombre total de recettes filtrées
 function renderTotal(array) {
   if (!Array.isArray(array)) {
     console.error("L'argument passé à renderTotal n'est pas un tableau.");
@@ -67,5 +61,5 @@ function renderTotal(array) {
   }
 
   let total = array.length;
-  totalRecipes.textContent = total + (total <= 1 ? " recette" : " recettes"); // Affiche le nombre de recettes avec une gestion du singulier/pluriel
+  totalRecipes.textContent = total + (total <= 1 ? " recette" : " recettes");
 }
