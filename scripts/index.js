@@ -2,12 +2,11 @@
 
 import { fetchRecipes } from "./api/fetch.js";
 import { displayRecipes } from "./ui/display/displayRecipes.js";
-import { searchRecipes } from "./api/search.js";
 import { selectedTags } from "./utils.js";
 import "./ui/filter/filter.js";
 import "./ui/dropdown/dropdown.js";
+import { updateRecipes } from "./ui/filter/updateRecipes.js"; // Import de updateRecipes
 
-// Ajout d'un écouteur d'événements pour s'assurer que le DOM est complètement chargé
 document.addEventListener("DOMContentLoaded", () => {
   // Récupère et affiche les recettes initiales
   fetchRecipes().then((data) => {
@@ -19,9 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const query = e.target.value; // Récupère la valeur de l'input de recherche
     if (query.length >= 3 || query.length === 0) {
       // Si la longueur de la recherche est >= 3 ou égale à 0
-      searchRecipes(query, selectedTags).then((filteredRecipes) => {
-        displayRecipes(filteredRecipes);
-      });
+      updateRecipes(); // Utilisation de updateRecipes
     }
   });
 });
